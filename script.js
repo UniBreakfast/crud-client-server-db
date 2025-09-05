@@ -18,6 +18,15 @@ function prepareList() {
   const list = document.querySelector("ul");
 
   list.onclick = handleItemClick;
+  list.onmouseout = handleMouseBlur;
+}
+
+function handleMouseBlur(e) {
+  const btn = e.target.closest("button");
+
+  if (!btn) return;
+
+  btn.blur();
 }
 
 function handleSubmitNew(e) {
