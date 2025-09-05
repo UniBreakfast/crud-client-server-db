@@ -40,8 +40,11 @@ function handleItemClick(e) {
 
   if (i === -1) return;
 
-  if (btn.matches(".edit")) allowEdit(i);
-  
+  if (btn.matches(".edit")) {
+    showItems();
+    allowEdit(i);
+  }
+
   if (btn.matches(".delete")) {
     deleteItem(i);
     showItems();
@@ -64,13 +67,11 @@ function addItem(str) {
 }
 
 function allowEdit(i) {
-  showItems();
-  
   const ul = document.querySelector("ul");
   const li = ul.children[i];
   const str = dataItems[i];
   const form = buildEditForm(str);
-  
+
   li.replaceChildren(form);
 }
 
