@@ -8,6 +8,16 @@ loadItems();
 showItems();
 prepareForm();
 prepareList();
+watchStorage();
+
+function watchStorage() {
+  onstorage = e => {
+    if (e.key === "dataItems") {
+      loadItems();
+      showItems();
+    }
+  }
+}
 
 function loadItems() {
   const json = localStorage.getItem("dataItems");
@@ -16,7 +26,9 @@ function loadItems() {
 }
 
 function saveItems() {
-  localStorage.setItem("dataItems", JSON.stringify(dataItems));
+  const newLocal = JSON.stringify(dataItems);
+
+  localStorage.setItem("dataItems", newLocal);
 }
 
 function prepareForm() {
