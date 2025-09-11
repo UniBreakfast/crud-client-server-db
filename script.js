@@ -1,12 +1,23 @@
-const dataItems = [
+let dataItems = [
   "Alpha",
   "Beta",
   "Gamma",
 ];
 
+loadItems();
 showItems();
 prepareForm();
 prepareList();
+
+function loadItems() {
+  const json = localStorage.getItem("dataItems");
+
+  if (json) dataItems = JSON.parse(json);
+}
+
+function saveItems() {
+  localStorage.setItem("dataItems", JSON.stringify(dataItems));
+}
 
 function prepareForm() {
   const form = document.querySelector("form");
@@ -34,6 +45,7 @@ function handleSubmitNew(e) {
   const str = form.item.value;
 
   addItem(str);
+  saveItems();
   showItems();
 
   form.reset();
@@ -56,6 +68,7 @@ function handleItemClick(e) {
 
   if (btn.matches(".delete")) {
     deleteItem(i);
+    saveItems();
     showItems();
   }
 }
@@ -133,6 +146,7 @@ function handleSubmitRename(e) {
 
   if (btn.matches(".save")) {
     updateItem(i, str);
+    saveItems();
     showItems();
   }
 
